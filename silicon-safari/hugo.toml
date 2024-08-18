@@ -1,4 +1,4 @@
 baseURL = 'https://silicon-safari.github.io/'
 languageCode = 'en-us'
 title = 'The Silicon Safari'
-theme = 'JuiceBar'
+theme = 'holy'
