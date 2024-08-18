@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <title>DatabaseDesignUsingHashMaps - The Silicon Safari</title>
+
+    
+    
+    <meta name="description" content="Database Design Using Hash Indexes Hi Guyz, This is alanturrr1703.
+This is my first blog, and I really don&rsquo;t know what I am doing. But I will be writing these just for fun; some blogs might have some good points that might actually work for someone, but honestly, these blogs are my notes of the things that I am actually interested in.
+Why Do We Need Databases? Starting with database design using Hash Indexes." />
+    <meta name="author" content="" />
+    
+
+    <link href="https://unpkg.com/@master/normal.css" rel="stylesheet">
+    <script src="https://unpkg.com/@master/style@1.5.0"></script>
+    <script src="https://unpkg.com/@master/styles@1.13.0"></script>
+    <script src="https://unpkg.com/master-styles-group"></script>
+    <script src="https://unpkg.com/themes.js"></script>
+    <script>window.themes = window.themes || new window.Themes()</script>
+
+    <style>
+        :root {
+            --font-sans: "Inter var", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+        }
+    </style></head>
+<body class="bg:fade-84@dark font:fade-16@dark font:sans">
+    <nav class="w:full h:90 fixed bg:fade-84/.95@dark bg:white z:1000">
+    <div class="
+        h:full
+        w:full
+        max-w:1200
+        mx:auto
+        px:32
+        d:flex
+        align-items:center
+    ">
+        <div>
+            <a href="/" class="mr-3 font:extralight">
+              
+              The Silicon Safari
+              
+            </a>
+        </div>
+
+        <div class="ml:auto">
+            
+            
+            
+        </div>
+    </div>
+</nav>
+<div class="d:flex flex:column@<=sm pt:90 px:24 jc:center gap:44 word-break:break-word">
+        <div class="max-w:700 w:full box:content-box">
+<article class="box:border-box pt:32">
+    <header class="mb:32">
+        <div class="font:40 font:extrabold">DatabaseDesignUsingHashMaps</div>
+        <div class="mt:16 f:fade-60">
+            <time>Aug 18, 2024</time>
+            </div>
+    </header><div class="
+    _:where(a):hover{text-decoration-color:fade}
+    _:where(a){text-decoration:2;underline;fade-10;_text-decoration-color:fade-70@dark}
+    _:where(blockquote){bl:5;solid;fade-76/.1;_bl:5;solid;fade-34/.1@dark}
+    _:where(code){font:90%;_v:middle}
+    _:where(code:not(.highlight_*,pre_*)){p:2;6;_r:4}
+    _:where(del){text-decoration:1;line-through;fade-68;_text-decoration-color:red-64@dark}
+    _:where(figcaption){text:14;_p:10;20;0;_width:fit;_mx:auto;_font:fade-56;_font:fade-57@dark}
+    _:where(h1){font:40;_font:extrabold}
+    _:where(h1,h2,h3)+:where(h1,h2,h3){mt:.5em}
+    _:where(h1,h2,h3,h4,h5,h6){mt:2em}
+    _:where(h2){mb:1em;_font:32}
+    _:where(h3){font:24}
+    _:where(h4){font:20}
+    _:where(h5){font:16}
+    _:where(h6){font:14}
+    _:where(li)::marker{font:fade-44;_font:fade-68@dark}
+    _:where(li){pl:.375em}
+    _:where(mark){text-decoration:1;underline;#fce016;_bg:transparent;_text-decoration-color:rgb(252;224;22/.5)@dark}
+    _:where(p,li){font:fade-76;_font:16;_line-height:1.65;_font:fade-34@dark}
+    _:where(p,pre,blockquote,figure,ul,ol,table){my:1.125em}
+    >:first-child{mt:0!}
+    _:where(pre){p:20;_r:8;_overflow:auto}
+    _:where(pre,code:not(.highlight_*)){bg:fade-2;_bg:fade-92!@dark}
+    _:where(strong,b,a,code:not(.highlight_*),mark,del){font:fade-92;_font:fade-12@dark}
+    _:where(table){width:full;_border-spacing:0}
+    _:where(td){v:baseline}
+    _:where(td,th):first-child{pl:0}
+    _:where(td,th):last-child{pr:0}
+    _:where(td,th){bb:1;solid;fade-92/.06;_p:6;_b:fade-4/.04@dark}
+    _:where(th){font:fade-78;_font:14;_text:left;_font:fade-12@dark}
+    _:where(th,p_code,li_code,a,mark){font:semibold;_font:medium@dark}
+    _:where(ul){list-style-type:disc}
+    _:where(ul,ol,blockquote){pl:1.5em}
+    _:where(video,img){max-width:full}
+    _:where(a,mark){text-underline-offset:3}
+    _:where(hr){h:2;_bg:fade-10;_bg:fade-70@dark;_my:3em}
+"><h1 id="database-design-using-hash-indexes">Database Design Using Hash Indexes</h1>
+<p>Hi Guyz, This is alanturrr1703.</p>
+<p>This is my first blog, and I really don&rsquo;t know what I am doing. But I will be writing these just for fun; some blogs might have some good points that might actually work for someone, but honestly, these blogs are my notes of the things that I am actually interested in.</p>
+<h2 id="why-do-we-need-databases">Why Do We Need Databases?</h2>
+<p>Starting with database design using Hash Indexes.</p>
+<p>Now, what is really the need for databases? Why can&rsquo;t we use something like programs everywhere? When we are designing some software and say we want to output something that is, more often than not, static—say some data of a user of software. These kinds of problems, which are pretty general, lead to the need for a database. This data has to be some kind of permanent storage, so it can&rsquo;t be on RAM. It also should have features like there shouldn&rsquo;t be redundant compute, data recovery should be simple, and blah blah blah.</p>
+<p>I feel like if you are reading my blog, you have already put in some kind of diligent work to know all these trivial things.</p>
+<h2 id="what-is-hashing-and-how-can-it-be-used-to-create-databases">What is Hashing and How Can It Be Used to Create Databases?</h2>
+<p>Now let&rsquo;s start addressing the elephant in the room.</p>
+<p>What is hashing, and how can it be used to create databases? Well, let&rsquo;s get on with the real stuff—no, actually, for this blog, the real explanation is not required. Hashing is that secret formula that one applies to a number that gives data an ID, so it&rsquo;s a kind of encryption-decryption. If one knows the hashing formula or, for those who know mathematics, the hashing function, they can decrypt the data.</p>
+<p>Now, we apply the hashing function not for the security of the data but actually for accessing the data as fast as possible.</p>
+<p>Let&rsquo;s see this with an example:</p>
+<p><img src="./image.png" alt="Hashing Example"></p>
+<p>Now here, fetching data is simple for many users.</p>
+<p>For example, there is this <code>h(x)</code>, the hashing function. Whatever it may be, when one puts 1 into the function, it will always output <code>98798327</code>. And we know that at that place, particularly in the hard drive, the data is related to Jake. But this might not be the case when we use searching algorithms like binary search or linear search.</p>
+<p>This may require <code>O(N)</code> space, but so does storing the data for searching. The fun part is that the time complexity of this algorithm is <code>O(1)</code>. While this can take a lot of time to write a large amount of data, which is <code>O(N)</code> with compute, the problem here is the collision of the data, like two hash functions giving the same output, say:</p>
+<ul>
+<li><code>h(5) = 12345678</code></li>
+<li><code>h(10) = 12345678</code></li>
+</ul>
+<p>which is the same.</p>
+<p>In this case, collision algorithms are used, which may increase the writing complexity to <code>O(N)</code>.</p>
+<p>Using this hashing, we can design a database that works on hashing.</p>
+<h2 id="downsides-of-hashing">Downsides of Hashing</h2>
+<p>Now let&rsquo;s understand the downsides of this.</p>
+<ol>
+<li>Hashing happens in RAM; reading and writing happens via RAM.</li>
+<li>RAMs are costly.</li>
+<li>RAMs are not reliable for storing permanent data.</li>
+<li>In case of any system failure, some of the data is erased due to this.</li>
+<li>If you are not getting it from the above explanation, then read this explanation just for you—I will go in depth. 😘😘</li>
+</ol>
+<p>You are thinking, why not store the hash function in hard disk memory itself? Well, you are not special; finding the data is tough.</p>
+<p>Now you might be thinking that we can put it in such a way that it is very accessible. Alright, you are getting somewhere, but still, you are nothing special or a genius of some kind. This has also been done using Read-Ahead Log, which is like data you likely need next to read and preload into the system when restarting the system. But still, this can be made more efficient.</p>
+<p>So yeah, this is a complete summary of how this works.</p>
+<p>Enjoy! Do what you want with this information.</p>
+<p>I will be back with two more ways to design a database.</p>
+<p>HEHE. 😁😁😁😁</p>
+</div></article>
+<footer class="py:24">
+    <div class="f:fade-30 f:14 mb:8"></div>
+    <div class="f:fade-60 f:12">Theme <a class="f:bold" href="https://github.com/serkodev/holy" _target="_blank">Holy</a></div>
+</footer></div>
+    </div>
+</body>
+
+</html>
