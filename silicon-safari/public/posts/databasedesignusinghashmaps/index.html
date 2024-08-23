@@ -109,7 +109,7 @@ Now, what is really the need for databases?" />
 <p>What is hashing, and how can it be used to create databases? Well, let&rsquo;s get on with the real stuff—no, actually, for this blog, the real explanation is not required. Hashing is that secret formula that one applies to a number that gives data an ID, so it&rsquo;s a kind of encryption-decryption. If one knows the hashing formula or, for those who know mathematics, the hashing function, they can decrypt the data.</p>
 <p>Now, we apply the hashing function not for the security of the data but actually for accessing the data as fast as possible.</p>
 <p>Let&rsquo;s see this with an example:</p>
-<p><img src="image.png" alt="alt text"></p>
+<p><img src="/images/image.png" alt="alt text"></p>
 <p>Now here, fetching data is simple for many users.</p>
 <p>For example, there is this <code>h(x)</code>, the hashing function. Whatever it may be, when one puts 1 into the function, it will always output <code>98798327</code>. And we know that at that place, particularly in the hard drive, the data is related to Jake. But this might not be the case when we use searching algorithms like binary search or linear search.</p>
 <p>This may require <code>O(N)</code> space, but so does storing the data for searching. The fun part is that the time complexity of this algorithm is <code>O(1)</code>. While this can take a lot of time to write a large amount of data, which is <code>O(N)</code> with compute, the problem here is the collision of the data, like two hash functions giving the same output, say:</p>

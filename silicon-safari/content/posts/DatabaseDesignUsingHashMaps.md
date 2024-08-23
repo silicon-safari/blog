@@ -24,7 +24,7 @@ Now, we apply the hashing function not for the security of the data but actually
 
 Let's see this with an example:
 
-![alt text](image.png)
+![alt text](/images/image.png)
 
 Now here, fetching data is simple for many users.
 
