@@ -6,14 +6,14 @@
     <description>Recent content in Posts on The Silicon Safari</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 18 Aug 2024 11:50:51 +0530</lastBuildDate>
+    <lastBuildDate>Fri, 18 Aug 2023 11:50:51 +0530</lastBuildDate>
     <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>DatabaseDesignUsingHashMaps</title>
+      <title>Database Design Using Hash Indexes</title>
       <link>http://localhost:1313/posts/databasedesignusinghashmaps/</link>
-      <pubDate>Sun, 18 Aug 2024 11:50:51 +0530</pubDate>
+      <pubDate>Fri, 18 Aug 2023 11:50:51 +0530</pubDate>
       <guid>http://localhost:1313/posts/databasedesignusinghashmaps/</guid>
-      <description>Database Design Using Hash Indexes Hi Guyz, This is alanturrr1703.&#xA;This is my first blog, and I really don&amp;rsquo;t know what I am doing. But I will be writing these just for fun; some blogs might have some good points that might actually work for someone, but honestly, these blogs are my notes of the things that I am actually interested in.&#xA;Why Do We Need Databases? Starting with database design using Hash Indexes.</description>
+      <description>Hi Guyz, This is alanturrr1703.&#xA;This is my first blog, and I really don&amp;rsquo;t know what I am doing. But I will be writing these just for fun; some blogs might have some good points that might actually work for someone, but honestly, these blogs are my notes of the things that I am actually interested in.&#xA;Why Do We Need Databases? Starting with database design using Hash Indexes.&#xA;Now, what is really the need for databases?</description>
     </item>
   </channel>
 </rss>

@@ -1,9 +1,7 @@
 +++
-title = 'DatabaseDesignUsingHashMaps'
-date = 2024-08-18T11:50:51+05:30
+title = 'Database Design Using Hash Indexes'
+date = 2023-08-18T11:50:51+05:30
 +++
-# Database Design Using Hash Indexes
-
 Hi Guyz, This is alanturrr1703.
 
 This is my first blog, and I really don't know what I am doing. But I will be writing these just for fun; some blogs might have some good points that might actually work for someone, but honestly, these blogs are my notes of the things that I am actually interested in.
@@ -26,7 +24,7 @@ Now, we apply the hashing function not for the security of the data but actually
 
 Let's see this with an example:
 
-![Hashing Example](./image.png)
+![alt text](image.png)
 
 Now here, fetching data is simple for many users.
 
