@@ -2,3 +2,7 @@
 	path = silicon-safari-blog/--force
 	url = https://github.com/silicon-safari/silicon-safari.github.io.git
 	branch = main
+[submodule "silicon-safari-blog/public/silicon-safari.github.io"]
+	path = silicon-safari-blog/public/silicon-safari.github.io
+	url = https://github.com/silicon-safari/silicon-safari.github.io.git
+	branch = main
