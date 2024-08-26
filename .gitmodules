@@ -6,3 +6,7 @@
 	path = silicon-safari-blog/public/silicon-safari.github.io
 	url = https://github.com/silicon-safari/silicon-safari.github.io.git
 	branch = main
+[submodule "silicon-safari-blog/prod-blog"]
+	path = silicon-safari-blog/prod-blog
+	url = https://github.com/silicon-safari/silicon-safari.github.io.git
+	branch = main
