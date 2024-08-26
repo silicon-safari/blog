@@ -1,0 +1,4 @@
+[submodule "silicon-safari-blog/--force"]
+	path = silicon-safari-blog/--force
+	url = https://github.com/silicon-safari/silicon-safari.github.io.git
+	branch = main
