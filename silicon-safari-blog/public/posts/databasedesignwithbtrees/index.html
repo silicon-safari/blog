@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=53992&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <title>Database Design Using B-Trees - The Silicon Safari</title>
+
+    
+    
+    <meta name="description" content="Hi guys, it’s alanturrr1703 again.
+I’m back with another blog, and this time, we’re diving deep into the world of B-Trees, one of the most fundamental data structures in database design. This one’s going to be a bit longer, so grab a snack and settle in.
+What Are B-Trees? Let’s start with the basics—what exactly is a B-Tree?
+A B-Tree is a self-balancing tree data structure that maintains sorted data and allows searches, sequential access, insertions, and deletions in logarithmic time." />
+    <meta name="author" content="" />
+    
+
+    <link href="https://unpkg.com/@master/normal.css" rel="stylesheet">
+    <script src="https://unpkg.com/@master/style@1.5.0"></script>
+    <script src="https://unpkg.com/@master/styles@1.13.0"></script>
+    <script src="https://unpkg.com/master-styles-group"></script>
+    <script src="https://unpkg.com/themes.js"></script>
+    <script>window.themes = window.themes || new window.Themes()</script>
+
+    <style>
+        :root {
+            --font-sans: "Inter var", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+        }
+    </style></head>
+<body class="bg:fade-84@dark font:fade-16@dark font:sans">
+    <nav class="w:full h:90 fixed bg:fade-84/.95@dark bg:white z:1000">
+    <div class="
+        h:full
+        w:full
+        max-w:1200
+        mx:auto
+        px:32
+        d:flex
+        align-items:center
+    ">
+        <div>
+            <a href="/" class="mr-3 font:extralight">
+              
+              The Silicon Safari
+              
+            </a>
+        </div>
+
+        <div class="ml:auto">
+            
+            
+            
+        </div>
+    </div>
+</nav>
+<div class="d:flex flex:column@<=sm pt:90 px:24 jc:center gap:44 word-break:break-word">
+        <div class="max-w:700 w:full box:content-box">
+<article class="box:border-box pt:32">
+    <header class="mb:32">
+        <div class="font:40 font:extrabold">Database Design Using B-Trees</div>
+        <div class="mt:16 f:fade-60">
+            <time>Aug 23, 2023</time>
+            </div>
+    </header><div class="
+    _:where(a):hover{text-decoration-color:fade}
+    _:where(a){text-decoration:2;underline;fade-10;_text-decoration-color:fade-70@dark}
+    _:where(blockquote){bl:5;solid;fade-76/.1;_bl:5;solid;fade-34/.1@dark}
+    _:where(code){font:90%;_v:middle}
+    _:where(code:not(.highlight_*,pre_*)){p:2;6;_r:4}
+    _:where(del){text-decoration:1;line-through;fade-68;_text-decoration-color:red-64@dark}
+    _:where(figcaption){text:14;_p:10;20;0;_width:fit;_mx:auto;_font:fade-56;_font:fade-57@dark}
+    _:where(h1){font:40;_font:extrabold}
+    _:where(h1,h2,h3)+:where(h1,h2,h3){mt:.5em}
+    _:where(h1,h2,h3,h4,h5,h6){mt:2em}
+    _:where(h2){mb:1em;_font:32}
+    _:where(h3){font:24}
+    _:where(h4){font:20}
+    _:where(h5){font:16}
+    _:where(h6){font:14}
+    _:where(li)::marker{font:fade-44;_font:fade-68@dark}
+    _:where(li){pl:.375em}
+    _:where(mark){text-decoration:1;underline;#fce016;_bg:transparent;_text-decoration-color:rgb(252;224;22/.5)@dark}
+    _:where(p,li){font:fade-76;_font:16;_line-height:1.65;_font:fade-34@dark}
+    _:where(p,pre,blockquote,figure,ul,ol,table){my:1.125em}
+    >:first-child{mt:0!}
+    _:where(pre){p:20;_r:8;_overflow:auto}
+    _:where(pre,code:not(.highlight_*)){bg:fade-2;_bg:fade-92!@dark}
+    _:where(strong,b,a,code:not(.highlight_*),mark,del){font:fade-92;_font:fade-12@dark}
+    _:where(table){width:full;_border-spacing:0}
+    _:where(td){v:baseline}
+    _:where(td,th):first-child{pl:0}
+    _:where(td,th):last-child{pr:0}
+    _:where(td,th){bb:1;solid;fade-92/.06;_p:6;_b:fade-4/.04@dark}
+    _:where(th){font:fade-78;_font:14;_text:left;_font:fade-12@dark}
+    _:where(th,p_code,li_code,a,mark){font:semibold;_font:medium@dark}
+    _:where(ul){list-style-type:disc}
+    _:where(ul,ol,blockquote){pl:1.5em}
+    _:where(video,img){max-width:full}
+    _:where(a,mark){text-underline-offset:3}
+    _:where(hr){h:2;_bg:fade-10;_bg:fade-70@dark;_my:3em}
+"><p>Hi guys, it’s alanturrr1703 again.</p>
+<p>I’m back with another blog, and this time, we’re diving deep into the world of B-Trees, one of the most fundamental data structures in database design. This one’s going to be a bit longer, so grab a snack and settle in.</p>
+<h2 id="what-are-b-trees">What Are B-Trees?</h2>
+<p>Let’s start with the basics—what exactly is a B-Tree?</p>
+<p>A B-Tree is a self-balancing tree data structure that maintains sorted data and allows searches, sequential access, insertions, and deletions in logarithmic time. Unlike binary trees, where each node has at most two children, B-Trees can have multiple children, which makes them particularly effective for database indexing.</p>
+<p>The &ldquo;B&rdquo; in B-Tree stands for &ldquo;Balanced&rdquo; or &ldquo;Bayer&rdquo; (after one of its inventors, Rudolf Bayer), but it’s commonly understood to emphasize that the tree remains balanced through its operations.</p>
+<h3 id="structure-of-a-b-tree">Structure of a B-Tree</h3>
+<p>A B-Tree is defined by several key properties:</p>
+<ol>
+<li>
+<p><strong>Node Structure</strong>: Each node contains a certain number of keys. The number of keys (let’s call it <code>n</code>) defines the degree of the tree. For a B-Tree of degree <code>d</code>:</p>
+<ul>
+<li>Every node can have at most <code>2d - 1</code> keys.</li>
+<li>Every node can have at most <code>2d</code> children.</li>
+<li>A node with <code>n</code> keys has exactly <code>n + 1</code> children.</li>
+</ul>
+</li>
+<li>
+<p><strong>Root Node</strong>: The root node has at least two children unless it is a leaf node.</p>
+</li>
+<li>
+<p><strong>Internal Nodes</strong>: All internal nodes (i.e., non-leaf nodes) have at least <code>d</code> children. This property ensures that the tree remains balanced.</p>
+</li>
+<li>
+<p><strong>Leaf Nodes</strong>: All leaf nodes appear on the same level, which means the tree is always balanced. This is a crucial property that guarantees the efficiency of the B-Tree.</p>
+</li>
+</ol>
+<h3 id="example-of-a-b-tree">Example of a B-Tree</h3>
+<p>To better understand, let’s consider an example of a B-Tree with a degree <code>d = 2</code>. This means:</p>
+<ul>
+<li>Each node can have at most <code>3</code> keys (<code>2d - 1 = 3</code>).</li>
+<li>Each node can have at most <code>4</code> children (<code>2d = 4</code>).</li>
+</ul>
+<p>Consider the following set of keys that we want to insert into the B-Tree: <code>[10, 20, 5, 6, 12, 30, 7, 17]</code>.</p>
+<ol>
+<li>
+<p><strong>Insertion of 10</strong>: Start with an empty root node and insert <code>10</code>.</p>
+<pre tabindex="0"><code>[10]
+</code></pre></li>
+<li>
+<p><strong>Insertion of 20</strong>: Add <code>20</code> to the root node.</p>
+<pre tabindex="0"><code>[10, 20]
+</code></pre></li>
+<li>
+<p><strong>Insertion of 5</strong>: Add <code>5</code> to the root node, ensuring that keys remain sorted.</p>
+<pre tabindex="0"><code>[5, 10, 20]
+</code></pre></li>
+<li>
+<p><strong>Insertion of 6</strong>: Adding <code>6</code> will cause the root node to exceed the maximum allowed keys (<code>3</code> keys), so we split the node:</p>
+<ul>
+<li>Split the node into two nodes <code>[5]</code> and <code>[20]</code>, and move <code>10</code> up to the new root node.</li>
+</ul>
+<pre tabindex="0"><code>     [10]
+    /    \
+ [5]    [20]
+</code></pre></li>
+<li>
+<p><strong>Insertion of 12</strong>: Insert <code>12</code> into the appropriate child node.</p>
+<pre tabindex="0"><code>     [10]
+    /    \ 
+ [5]    [12, 20]
+</code></pre></li>
+<li>
+<p><strong>Insertion of 30</strong>: Insert <code>30</code> into the appropriate child node.</p>
+<pre tabindex="0"><code>     [10]
+    /    \
+ [5]    [12, 20, 30]
+</code></pre></li>
+<li>
+<p><strong>Insertion of 7</strong>: Insert <code>7</code> into the appropriate child node.</p>
+<pre tabindex="0"><code>     [10]
+    /    \ 
+ [5, 7] [12, 20, 30]
+</code></pre></li>
+<li>
+<p><strong>Insertion of 17</strong>: Adding <code>17</code> causes the right child to exceed the allowed keys, so split it:</p>
+<ul>
+<li>Split <code>[12, 20, 30]</code> into <code>[12]</code> and <code>[20, 30]</code>, and move <code>17</code> up to the root.</li>
+</ul>
+<pre tabindex="0"><code>        [10, 17]
+       /    |   \  
+    [5, 7] [12] [20, 30]
+</code></pre></li>
+</ol>
+<p>This structure is an example of a B-Tree where the tree remains balanced after every insertion.</p>
+<h2 id="operations-on-b-trees">Operations on B-Trees</h2>
+<h3 id="1-search-operation">1. <strong>Search Operation</strong></h3>
+<p>Searching in a B-Tree is straightforward. You start at the root node and compare the key you’re looking for with the keys in the node. If it matches, you’ve found your key. If it doesn’t match, you move to the appropriate child node based on the comparison.</p>
+<p>The process continues recursively, moving down the tree until either the key is found or you reach a leaf node.</p>
+<h3 id="2-insertion-operation">2. <strong>Insertion Operation</strong></h3>
+<p>When inserting a new key, you always start at the root node. The key is added to the appropriate node, ensuring that the keys remain in sorted order. If the node overflows (i.e., it has more than <code>2d - 1</code> keys), it is split, and the middle key is moved up to the parent node. This process may continue up the tree, potentially causing splits at higher levels and leading to the creation of a new root node.</p>
+<h3 id="3-deletion-operation">3. <strong>Deletion Operation</strong></h3>
+<p>Deletion in a B-Tree is more complex. The key to be deleted can be found in a leaf node or an internal node. The deletion process involves the following steps:</p>
+<ul>
+<li>If the key is in a leaf node, simply remove it.</li>
+<li>If the key is in an internal node, find the predecessor or successor of the key and replace the key with it. Then, remove the predecessor or successor key from the leaf node.</li>
+<li>If a node underflows (i.e., it has fewer than <code>d</code> keys), it may borrow a key from a sibling or merge with a sibling, ensuring the tree remains balanced.</li>
+</ul>
+<h3 id="4-balancing-the-tree">4. <strong>Balancing the Tree</strong></h3>
+<p>Balancing in a B-Tree is implicit in its operations. Every time a node is split or merged, the tree adjusts itself to maintain its balanced property. This ensures that the height of the tree remains logarithmic relative to the number of keys, guaranteeing efficient search, insertion, and deletion operations.</p>
+<h2 id="why-are-b-trees-important-in-database-design">Why Are B-Trees Important in Database Design?</h2>
+<p>B-Trees are the go-to data structure for indexing in databases because they provide a good balance between read and write performance. Here’s why they’re so effective:</p>
+<ol>
+<li>
+<p><strong>Disk-Based Storage</strong>: B-Trees are optimized for systems where data is stored on disk. The structure of a B-Tree allows for large blocks of data to be read or written in a single disk I/O operation, minimizing the number of costly disk accesses.</p>
+</li>
+<li>
+<p><strong>Balanced Tree Structure</strong>: The self-balancing nature of B-Trees ensures that all operations—searching, inserting, and deleting—are performed in <code>O(log n)</code> time, where <code>n</code> is the number of keys in the tree.</p>
+</li>
+<li>
+<p><strong>Efficient Range Queries</strong>: B-Trees support efficient range queries, making them ideal for scenarios where you need to retrieve a range of data (e.g., fetching records with keys between two values).</p>
+</li>
+<li>
+<p><strong>Multi-Level Indexing</strong>: In large databases, B-Trees are often used in multi-level indexing, where the root and internal nodes are kept in memory for fast access, while the leaf nodes, which contain the actual data or pointers to data, are stored on disk.</p>
+</li>
+</ol>
+<h2 id="variants-of-b-trees">Variants of B-Trees</h2>
+<p>Over time, several variants of B-Trees have been developed to address specific needs:</p>
+<ol>
+<li>
+<p><strong>B+ Trees</strong>: In a B+ Tree, all the keys are stored in the leaf nodes, while internal nodes only store keys as pointers to the child nodes. This allows for better performance in range queries and makes the tree easier to traverse.</p>
+</li>
+<li>
+<p><em><em>B</em> Trees</em>*: B* Trees are a variation of B-Trees that aim to improve space utilization by delaying the split operation. Instead of splitting a node as soon as it overflows, a B* Tree first tries to redistribute keys between the overflowing node and its sibling. Only if this fails does it perform the split.</p>
+</li>
+<li>
+<p><strong>B# Trees</strong>: B# Trees are designed for databases with variable-length keys. They maintain a more compact structure by using prefix compression in internal nodes.</p>
+</li>
+</ol>
+<h2 id="wrapping-it-up">Wrapping It Up</h2>
+<p>B-Trees are a cornerstone of database design. Their balanced nature and efficient use of disk I/O make them indispensable for indexing large datasets. Understanding how B-Trees work and their various operations can give you a solid foundation for designing and optimizing databases.</p>
+<p>I hope you found this detailed explanation helpful! Stay tuned for more in-depth blogs on database design.</p>
+<p>Until next time! 😁</p>
+</div></article>
+<footer class="py:24">
+    <div class="f:fade-30 f:14 mb:8"></div>
+    <div class="f:fade-60 f:12">Theme <a class="f:bold" href="https://github.com/serkodev/holy" _target="_blank">Holy</a></div>
+</footer></div>
+    </div>
+</body>
+
+</html>
