@@ -2,31 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>The Silicon Safari</title>
-    <link>http://localhost:1313/</link>
+    <link>https://silicon-safari.github.io/</link>
     <description>Recent content on The Silicon Safari</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 23 Aug 2023 11:50:51 +0530</lastBuildDate>
-    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://silicon-safari.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Database Design Using B-Trees</title>
-      <link>http://localhost:1313/posts/databasedesignwithbtrees/</link>
+      <link>https://silicon-safari.github.io/posts/databasedesignwithbtrees/</link>
       <pubDate>Wed, 23 Aug 2023 11:50:51 +0530</pubDate>
-      <guid>http://localhost:1313/posts/databasedesignwithbtrees/</guid>
+      <guid>https://silicon-safari.github.io/posts/databasedesignwithbtrees/</guid>
       <description>Hi guys, it’s alanturrr1703 again.&#xA;I’m back with another blog, and this time, we’re diving deep into the world of B-Trees, one of the most fundamental data structures in database design. This one’s going to be a bit longer, so grab a snack and settle in.&#xA;What Are B-Trees? Let’s start with the basics—what exactly is a B-Tree?&#xA;A B-Tree is a self-balancing tree data structure that maintains sorted data and allows searches, sequential access, insertions, and deletions in logarithmic time.</description>
     </item>
     <item>
       <title>Database Design Using LSM Trees and SSTables</title>
-      <link>http://localhost:1313/posts/databasedesignusinglsmtreesandsstables/</link>
+      <link>https://silicon-safari.github.io/posts/databasedesignusinglsmtreesandsstables/</link>
       <pubDate>Sun, 20 Aug 2023 11:50:51 +0530</pubDate>
-      <guid>http://localhost:1313/posts/databasedesignusinglsmtreesandsstables/</guid>
+      <guid>https://silicon-safari.github.io/posts/databasedesignusinglsmtreesandsstables/</guid>
       <description>Hi guys, it’s alanturrr1703 again.&#xA;I’m back with another blog, continuing our journey into database design. Last time, we talked about Hash Indexes. Today, let’s dive into another exciting topic: LSM Trees and SSTables.&#xA;What’s the Deal with LSM Trees and SSTables? Alright, let’s start with the basics. LSM (Log-Structured Merge) Trees are a type of data structure that’s really good at handling writes. Unlike traditional databases that write directly to disk, LSM Trees first write to a memory buffer.</description>
     </item>
     <item>
       <title>Database Design Using Hash Indexes</title>
-      <link>http://localhost:1313/posts/databasedesignusinghashmaps/</link>
+      <link>https://silicon-safari.github.io/posts/databasedesignusinghashmaps/</link>
       <pubDate>Fri, 18 Aug 2023 11:50:51 +0530</pubDate>
-      <guid>http://localhost:1313/posts/databasedesignusinghashmaps/</guid>
+      <guid>https://silicon-safari.github.io/posts/databasedesignusinghashmaps/</guid>
       <description>Hi guys, this is alanturrr1703.&#xA;This is my first blog, and honestly, I don’t know what I’m doing. But I’ll be writing these just for fun; some blogs might actually have some good points that could be useful to someone, but honestly, these blogs are my notes about things that I’m interested in.&#xA;Why Do We Need Databases? Let’s dive into database design using Hash Indexes.&#xA;Now, why do we really need databases?</description>
     </item>
   </channel>
