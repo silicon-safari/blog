@@ -1,64 +1,65 @@
+
 +++
 title = 'Database Design Using Hash Indexes'
 date = 2023-08-18T11:50:51+05:30
 +++
-Hi Guyz, This is alanturrr1703.
+Hi guys, this is alanturrr1703.
 
-This is my first blog, and I really don't know what I am doing. But I will be writing these just for fun; some blogs might have some good points that might actually work for someone, but honestly, these blogs are my notes of the things that I am actually interested in.
+This is my first blog, and honestly, I don’t know what I’m doing. But I’ll be writing these just for fun; some blogs might actually have some good points that could be useful to someone, but honestly, these blogs are my notes about things that I’m interested in.
 
 ## Why Do We Need Databases?
 
-Starting with database design using Hash Indexes.
+Let’s dive into database design using Hash Indexes.
 
-Now, what is really the need for databases? Why can't we use something like programs everywhere? When we are designing some software and say we want to output something that is, more often than not, static—say some data of a user of software. These kinds of problems, which are pretty general, lead to the need for a database. This data has to be some kind of permanent storage, so it can't be on RAM. It also should have features like there shouldn't be redundant compute, data recovery should be simple, and blah blah blah.
+Now, why do we really need databases? Why can’t we use something like programs everywhere? When we’re designing software and want to output something that is, more often than not, static—say, user data—this type of problem, which is quite common, creates the need for a database. This data has to be stored permanently, so it can’t be kept in RAM. It also needs features like preventing redundant computation, ensuring simple data recovery, and so on.
 
-I feel like if you are reading my blog, you have already put in some kind of diligent work to know all these trivial things.
+I feel like if you’re reading my blog, you’ve already done some diligent work to understand these basic concepts.
 
 ## What is Hashing and How Can It Be Used to Create Databases?
 
-Now let's start addressing the elephant in the room.
+Now, let’s address the elephant in the room.
 
-What is hashing, and how can it be used to create databases? Well, let's get on with the real stuff—no, actually, for this blog, the real explanation is not required. Hashing is that secret formula that one applies to a number that gives data an ID, so it's a kind of encryption-decryption. If one knows the hashing formula or, for those who know mathematics, the hashing function, they can decrypt the data.
+What is hashing, and how can it be used to create databases? Well, let’s get to the real stuff—though, for this blog, a deep explanation isn’t required. Hashing is like a secret formula applied to a number that gives the data an ID, functioning somewhat like encryption-decryption. If someone knows the hashing formula, or for those familiar with mathematics, the hashing function, they can decrypt the data.
 
-Now, we apply the hashing function not for the security of the data but actually for accessing the data as fast as possible.
+However, we apply the hashing function not for data security but for fast data access.
 
-Let's see this with an example:
+Let’s see this with an example:
 
 ![alt text](/images/image.png)
 
-Now here, fetching data is simple for many users.
+Fetching data for many users is simple with hashing.
 
-For example, there is this `h(x)`, the hashing function. Whatever it may be, when one puts 1 into the function, it will always output `98798327`. And we know that at that place, particularly in the hard drive, the data is related to Jake. But this might not be the case when we use searching algorithms like binary search or linear search.
+For example, there’s this `h(x)`, the hashing function. Whatever it may be, when you input 1 into the function, it will always output `98798327`. And we know that in the hard drive, data related to Jake is stored at that location. But this might not be the case when using searching algorithms like binary search or linear search.
 
-This may require `O(N)` space, but so does storing the data for searching. The fun part is that the time complexity of this algorithm is `O(1)`. While this can take a lot of time to write a large amount of data, which is `O(N)` with compute, the problem here is the collision of the data, like two hash functions giving the same output, say:
+This may require `O(N)` space, but so does storing the data for searching. The cool part is that the time complexity of this algorithm is `O(1)`. While writing a large amount of data can take time—`O(N)` with computation—the main issue here is the collision of data, where two hash functions produce the same output, like:
 
 - `h(5) = 12345678`
 - `h(10) = 12345678`
 
 which is the same.
 
-In this case, collision algorithms are used, which may increase the writing complexity to `O(N)`.
+In such cases, collision resolution algorithms are used, which may increase the writing complexity to `O(N)`.
 
-Using this hashing, we can design a database that works on hashing.
+Using this hashing, we can design a database that works efficiently with hash indexes.
 
 ## Downsides of Hashing
 
-Now let's understand the downsides of this.
+Now, let’s understand the downsides.
 
-1. Hashing happens in RAM; reading and writing happens via RAM.
-2. RAMs are costly.
-3. RAMs are not reliable for storing permanent data.
-4. In case of any system failure, some of the data is erased due to this.
-5. If you are not getting it from the above explanation, then read this explanation just for you—I will go in depth. 😘😘
+1. Hashing happens in RAM; reading and writing involve RAM.
+2. RAM is costly.
+3. RAM isn’t reliable for storing permanent data.
+4. In case of a system failure, some data might be lost.
+5. If you didn’t get it from the above explanation, here’s a more in-depth one—just for you. 😘😘
 
-You are thinking, why not store the hash function in hard disk memory itself? Well, you are not special; finding the data is tough.
+You might be thinking, why not store the hash function in hard disk memory itself? Well, you’re not special; finding the data would be tough.
 
-Now you might be thinking that we can put it in such a way that it is very accessible. Alright, you are getting somewhere, but still, you are nothing special or a genius of some kind. This has also been done using Read-Ahead Log, which is like data you likely need next to read and preload into the system when restarting the system. But still, this can be made more efficient.
+Now you might think we could store it in a way that makes it very accessible. Alright, you’re getting somewhere, but you’re still not a genius. This has been done using a Write-Ahead Log, which is like data you’ll likely need next, read and preloaded into the system when restarting. But even this can be optimized.
 
-So yeah, this is a complete summary of how this works.
+So yeah, that’s a summary of how this works.
 
-Enjoy! Do what you want with this information.
+Enjoy! Do whatever you want with this information.
 
-I will be back with two more ways to design a database.
+I’ll be back with two more ways to design a database.
 
 HEHE. 😁😁😁😁

@@ -4,11 +4,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-    <title>Posts - The Silicon Safari</title>
+    <title>Database Design Using LSM Trees and SSTables - The Silicon Safari</title>
 
     
     
-    <meta name="description" content="" />
+    <meta name="description" content="Hi guys, it’s alanturrr1703 again.
+I’m back with another blog, continuing our journey into database design. Last time, we talked about Hash Indexes. Today, let’s dive into another exciting topic: LSM Trees and SSTables.
+What’s the Deal with LSM Trees and SSTables? Alright, let’s start with the basics. LSM (Log-Structured Merge) Trees are a type of data structure that’s really good at handling writes. Unlike traditional databases that write directly to disk, LSM Trees first write to a memory buffer." />
     <meta name="author" content="" />
     
 
@@ -52,11 +54,13 @@
 </nav>
 <div class="d:flex flex:column@<=sm pt:90 px:24 jc:center gap:44 word-break:break-word">
         <div class="max-w:700 w:full box:content-box">
-<div>
-    <article class="box:border-box pt:32 w:full">
-        <header class="mb:32">
-            <div class="font:40 font:extrabold">Posts</div>
-        </header><div class="
+<article class="box:border-box pt:32">
+    <header class="mb:32">
+        <div class="font:40 font:extrabold">Database Design Using LSM Trees and SSTables</div>
+        <div class="mt:16 f:fade-60">
+            <time>Aug 20, 2023</time>
+            </div>
+    </header><div class="
     _:where(a):hover{text-decoration-color:fade}
     _:where(a){text-decoration:2;underline;fade-10;_text-decoration-color:fade-70@dark}
     _:where(blockquote){bl:5;solid;fade-76/.1;_bl:5;solid;fade-34/.1@dark}
@@ -93,34 +97,27 @@
     _:where(video,img){max-width:full}
     _:where(a,mark){text-underline-offset:3}
     _:where(hr){h:2;_bg:fade-10;_bg:fade-70@dark;_my:3em}
-"></div></article>
-    <ul>
-                <li>
-                    <div class="mb:16 py:24 f:fade-30 f:fade-10:hover transition:150ms;ease-in">
-                        <a class="f:24 font:semibold" href="http://localhost:1313/posts/databasedesignwithbtrees/">
-                            <div>Database Design Using B-Trees</div>
-                        </a>
-                        <div class="mt:12 f:fade-70"><time>Aug 23, 2023</time></div>
-                    </div>
-                </li>
-                <li>
-                    <div class="mb:16 py:24 f:fade-30 f:fade-10:hover transition:150ms;ease-in">
-                        <a class="f:24 font:semibold" href="http://localhost:1313/posts/databasedesignusinglsmtreesandsstables/">
-                            <div>Database Design Using LSM Trees and SSTables</div>
-                        </a>
-                        <div class="mt:12 f:fade-70"><time>Aug 20, 2023</time></div>
-                    </div>
-                </li>
-                <li>
-                    <div class="mb:16 py:24 f:fade-30 f:fade-10:hover transition:150ms;ease-in">
-                        <a class="f:24 font:semibold" href="http://localhost:1313/posts/databasedesignusinghashmaps/">
-                            <div>Database Design Using Hash Indexes</div>
-                        </a>
-                        <div class="mt:12 f:fade-70"><time>Aug 18, 2023</time></div>
-                    </div>
-                </li>
-    </ul>
-</div>
+"><p>Hi guys, it’s alanturrr1703 again.</p>
+<p>I’m back with another blog, continuing our journey into database design. Last time, we talked about Hash Indexes. Today, let’s dive into another exciting topic: LSM Trees and SSTables.</p>
+<h2 id="whats-the-deal-with-lsm-trees-and-sstables">What’s the Deal with LSM Trees and SSTables?</h2>
+<p>Alright, let’s start with the basics. LSM (Log-Structured Merge) Trees are a type of data structure that’s really good at handling writes. Unlike traditional databases that write directly to disk, LSM Trees first write to a memory buffer. This makes the initial write operation super fast, which is perfect when you have a lot of data coming in at high speed.</p>
+<p>But what about SSTables? They stand for Sorted String Tables, and they’re the way LSM Trees store data on disk. When the in-memory data buffer (also known as a MemTable) is full, it’s flushed to disk as an SSTable. Each SSTable is immutable, meaning once it’s written, it doesn’t change. This immutability makes things like data corruption less likely.</p>
+<h2 id="why-should-you-care">Why Should You Care?</h2>
+<p>LSM Trees and SSTables are the backbone of many modern NoSQL databases like Cassandra, LevelDB, and RocksDB. They’re particularly good when your application has high write throughput or when you need to handle large datasets.</p>
+<p>The real magic happens when you need to read data. Since there can be multiple SSTables on disk, a query might have to search through several files. But don’t worry, that’s where Bloom filters and compaction strategies come into play. Bloom filters help quickly check whether an SSTable might contain the data you’re looking for, while compaction merges multiple SSTables into a single one, making future reads faster.</p>
+<h2 id="the-downsides">The Downsides?</h2>
+<p>Like anything in tech, LSM Trees and SSTables have their trade-offs:</p>
+<ol>
+<li><strong>Compaction Overhead</strong>: Merging SSTables is resource-intensive, both in terms of CPU and disk I/O.</li>
+<li><strong>Read Latency</strong>: Because data can be spread across multiple SSTables, reading can be slower than with traditional B-Tree structures.</li>
+<li><strong>Write Amplification</strong>: The process of repeatedly writing data during compactions can increase the total amount of I/O, which can wear out SSDs faster.</li>
+</ol>
+<p>But if your workload is write-heavy or you’re dealing with massive datasets, these downsides might be worth it.</p>
+<h2 id="wrapping-it-up">Wrapping It Up</h2>
+<p>So, there you have it—LSM Trees and SSTables in a nutshell. They’re powerful tools for specific use cases, especially when high write performance and large-scale data storage are required.</p>
+<p>I hope you found this interesting! Stay tuned for the next blog, where I’ll discuss yet another method of database design.</p>
+<p>Until next time! 😁</p>
+</div></article>
 <footer class="py:24">
     <div class="f:fade-30 f:14 mb:8"></div>
     <div class="f:fade-60 f:12">Theme <a class="f:bold" href="https://github.com/serkodev/holy" _target="_blank">Holy</a></div>

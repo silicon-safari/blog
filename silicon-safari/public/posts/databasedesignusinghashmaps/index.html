@@ -8,10 +8,10 @@
 
     
     
-    <meta name="description" content="Hi Guyz, This is alanturrr1703.
-This is my first blog, and I really don&rsquo;t know what I am doing. But I will be writing these just for fun; some blogs might have some good points that might actually work for someone, but honestly, these blogs are my notes of the things that I am actually interested in.
-Why Do We Need Databases? Starting with database design using Hash Indexes.
-Now, what is really the need for databases?" />
+    <meta name="description" content="Hi guys, this is alanturrr1703.
+This is my first blog, and honestly, I don’t know what I’m doing. But I’ll be writing these just for fun; some blogs might actually have some good points that could be useful to someone, but honestly, these blogs are my notes about things that I’m interested in.
+Why Do We Need Databases? Let’s dive into database design using Hash Indexes.
+Now, why do we really need databases?" />
     <meta name="author" content="" />
     
 
@@ -98,42 +98,42 @@ Now, what is really the need for databases?" />
     _:where(video,img){max-width:full}
     _:where(a,mark){text-underline-offset:3}
     _:where(hr){h:2;_bg:fade-10;_bg:fade-70@dark;_my:3em}
-"><p>Hi Guyz, This is alanturrr1703.</p>
-<p>This is my first blog, and I really don&rsquo;t know what I am doing. But I will be writing these just for fun; some blogs might have some good points that might actually work for someone, but honestly, these blogs are my notes of the things that I am actually interested in.</p>
+"><p>Hi guys, this is alanturrr1703.</p>
+<p>This is my first blog, and honestly, I don’t know what I’m doing. But I’ll be writing these just for fun; some blogs might actually have some good points that could be useful to someone, but honestly, these blogs are my notes about things that I’m interested in.</p>
 <h2 id="why-do-we-need-databases">Why Do We Need Databases?</h2>
-<p>Starting with database design using Hash Indexes.</p>
-<p>Now, what is really the need for databases? Why can&rsquo;t we use something like programs everywhere? When we are designing some software and say we want to output something that is, more often than not, static—say some data of a user of software. These kinds of problems, which are pretty general, lead to the need for a database. This data has to be some kind of permanent storage, so it can&rsquo;t be on RAM. It also should have features like there shouldn&rsquo;t be redundant compute, data recovery should be simple, and blah blah blah.</p>
-<p>I feel like if you are reading my blog, you have already put in some kind of diligent work to know all these trivial things.</p>
+<p>Let’s dive into database design using Hash Indexes.</p>
+<p>Now, why do we really need databases? Why can’t we use something like programs everywhere? When we’re designing software and want to output something that is, more often than not, static—say, user data—this type of problem, which is quite common, creates the need for a database. This data has to be stored permanently, so it can’t be kept in RAM. It also needs features like preventing redundant computation, ensuring simple data recovery, and so on.</p>
+<p>I feel like if you’re reading my blog, you’ve already done some diligent work to understand these basic concepts.</p>
 <h2 id="what-is-hashing-and-how-can-it-be-used-to-create-databases">What is Hashing and How Can It Be Used to Create Databases?</h2>
-<p>Now let&rsquo;s start addressing the elephant in the room.</p>
-<p>What is hashing, and how can it be used to create databases? Well, let&rsquo;s get on with the real stuff—no, actually, for this blog, the real explanation is not required. Hashing is that secret formula that one applies to a number that gives data an ID, so it&rsquo;s a kind of encryption-decryption. If one knows the hashing formula or, for those who know mathematics, the hashing function, they can decrypt the data.</p>
-<p>Now, we apply the hashing function not for the security of the data but actually for accessing the data as fast as possible.</p>
-<p>Let&rsquo;s see this with an example:</p>
+<p>Now, let’s address the elephant in the room.</p>
+<p>What is hashing, and how can it be used to create databases? Well, let’s get to the real stuff—though, for this blog, a deep explanation isn’t required. Hashing is like a secret formula applied to a number that gives the data an ID, functioning somewhat like encryption-decryption. If someone knows the hashing formula, or for those familiar with mathematics, the hashing function, they can decrypt the data.</p>
+<p>However, we apply the hashing function not for data security but for fast data access.</p>
+<p>Let’s see this with an example:</p>
 <p><img src="/images/image.png" alt="alt text"></p>
-<p>Now here, fetching data is simple for many users.</p>
-<p>For example, there is this <code>h(x)</code>, the hashing function. Whatever it may be, when one puts 1 into the function, it will always output <code>98798327</code>. And we know that at that place, particularly in the hard drive, the data is related to Jake. But this might not be the case when we use searching algorithms like binary search or linear search.</p>
-<p>This may require <code>O(N)</code> space, but so does storing the data for searching. The fun part is that the time complexity of this algorithm is <code>O(1)</code>. While this can take a lot of time to write a large amount of data, which is <code>O(N)</code> with compute, the problem here is the collision of the data, like two hash functions giving the same output, say:</p>
+<p>Fetching data for many users is simple with hashing.</p>
+<p>For example, there’s this <code>h(x)</code>, the hashing function. Whatever it may be, when you input 1 into the function, it will always output <code>98798327</code>. And we know that in the hard drive, data related to Jake is stored at that location. But this might not be the case when using searching algorithms like binary search or linear search.</p>
+<p>This may require <code>O(N)</code> space, but so does storing the data for searching. The cool part is that the time complexity of this algorithm is <code>O(1)</code>. While writing a large amount of data can take time—<code>O(N)</code> with computation—the main issue here is the collision of data, where two hash functions produce the same output, like:</p>
 <ul>
 <li><code>h(5) = 12345678</code></li>
 <li><code>h(10) = 12345678</code></li>
 </ul>
 <p>which is the same.</p>
-<p>In this case, collision algorithms are used, which may increase the writing complexity to <code>O(N)</code>.</p>
-<p>Using this hashing, we can design a database that works on hashing.</p>
+<p>In such cases, collision resolution algorithms are used, which may increase the writing complexity to <code>O(N)</code>.</p>
+<p>Using this hashing, we can design a database that works efficiently with hash indexes.</p>
 <h2 id="downsides-of-hashing">Downsides of Hashing</h2>
-<p>Now let&rsquo;s understand the downsides of this.</p>
+<p>Now, let’s understand the downsides.</p>
 <ol>
-<li>Hashing happens in RAM; reading and writing happens via RAM.</li>
-<li>RAMs are costly.</li>
-<li>RAMs are not reliable for storing permanent data.</li>
-<li>In case of any system failure, some of the data is erased due to this.</li>
-<li>If you are not getting it from the above explanation, then read this explanation just for you—I will go in depth. 😘😘</li>
+<li>Hashing happens in RAM; reading and writing involve RAM.</li>
+<li>RAM is costly.</li>
+<li>RAM isn’t reliable for storing permanent data.</li>
+<li>In case of a system failure, some data might be lost.</li>
+<li>If you didn’t get it from the above explanation, here’s a more in-depth one—just for you. 😘😘</li>
 </ol>
-<p>You are thinking, why not store the hash function in hard disk memory itself? Well, you are not special; finding the data is tough.</p>
-<p>Now you might be thinking that we can put it in such a way that it is very accessible. Alright, you are getting somewhere, but still, you are nothing special or a genius of some kind. This has also been done using Read-Ahead Log, which is like data you likely need next to read and preload into the system when restarting the system. But still, this can be made more efficient.</p>
-<p>So yeah, this is a complete summary of how this works.</p>
-<p>Enjoy! Do what you want with this information.</p>
-<p>I will be back with two more ways to design a database.</p>
+<p>You might be thinking, why not store the hash function in hard disk memory itself? Well, you’re not special; finding the data would be tough.</p>
+<p>Now you might think we could store it in a way that makes it very accessible. Alright, you’re getting somewhere, but you’re still not a genius. This has been done using a Write-Ahead Log, which is like data you’ll likely need next, read and preloaded into the system when restarting. But even this can be optimized.</p>
+<p>So yeah, that’s a summary of how this works.</p>
+<p>Enjoy! Do whatever you want with this information.</p>
+<p>I’ll be back with two more ways to design a database.</p>
 <p>HEHE. 😁😁😁😁</p>
 </div></article>
 <footer class="py:24">
