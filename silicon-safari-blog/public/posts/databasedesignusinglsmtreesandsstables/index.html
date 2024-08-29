@@ -1,128 +1,358 @@
-<!DOCTYPE html>
-<html><head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-
-    <title>Database Design Using LSM Trees and SSTables - The Silicon Safari</title>
+<!doctype html>
+<html
+  dir="ltr"
+  lang="en"
+  data-theme=""
+  
+    class="html theme--light"
+  
+><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  <title>
+    
+        |
+        Database Design Using LSM Trees and SSTables
+      
 
     
-    
-    <meta name="description" content="Hi guys, it’s alanturrr1703 again.
-I’m back with another blog, continuing our journey into database design. Last time, we talked about Hash Indexes. Today, let’s dive into another exciting topic: LSM Trees and SSTables.
-What’s the Deal with LSM Trees and SSTables? Alright, let’s start with the basics. LSM (Log-Structured Merge) Trees are a type of data structure that’s really good at handling writes. Unlike traditional databases that write directly to disk, LSM Trees first write to a memory buffer." />
-    <meta name="author" content="" />
-    
 
-    <link href="https://unpkg.com/@master/normal.css" rel="stylesheet">
-    <script src="https://unpkg.com/@master/style@1.5.0"></script>
-    <script src="https://unpkg.com/@master/styles@1.13.0"></script>
-    <script src="https://unpkg.com/master-styles-group"></script>
-    <script src="https://unpkg.com/themes.js"></script>
-    <script>window.themes = window.themes || new window.Themes()</script>
+  </title>
 
-    <style>
-        :root {
-            --font-sans: "Inter var", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
-        }
-    </style></head>
-<body class="bg:fade-84@dark font:fade-16@dark font:sans">
-    <nav class="w:full h:90 fixed bg:fade-84/.95@dark bg:white z:1000">
-    <div class="
-        h:full
-        w:full
-        max-w:1200
-        mx:auto
-        px:32
-        d:flex
-        align-items:center
-    ">
-        <div>
-            <a href="/" class="mr-3 font:extralight">
-              
-              The Silicon Safari
-              
+  <meta name="generator" content="Hugo 0.133.0"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="author" content="" />
+  <meta
+    name="description"
+    content=""
+  />
+  
+  
+    
+    
+    <link
+      rel="stylesheet"
+      href="/scss/main.min.8d4fad7e6916ad2e291e8d97ada157c70350d6d7150fea137e7243340967befb.css"
+      integrity="sha256-jU&#43;tfmkWrS4pHo2XraFXxwNQ1tcVD&#43;oTfnJDNAlnvvs="
+      crossorigin="anonymous"
+      type="text/css"
+    />
+  
+
+  
+  <link
+    rel="stylesheet"
+    href="/css/markupHighlight.min.73ccfdf28df555e11009c13c20ced067af3cb021504cba43644c705930428b00.css"
+    integrity="sha256-c8z98o31VeEQCcE8IM7QZ688sCFQTLpDZExwWTBCiwA="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/fontawesome.min.10cb17328b3207590ce3d89fb482e7cd6937d8138cef2059c69cabd65ab7d6c6.css"
+    integrity="sha256-EMsXMosyB1kM49iftILnzWk32BOM7yBZxpyr1lq31sY="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/solid.min.7aa4d559d5fadcfed666b5679be54d0dbbcf6a0542742319765b253d2797cc44.css"
+    integrity="sha256-eqTVWdX63P7WZrVnm&#43;VNDbvPagVCdCMZdlslPSeXzEQ="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/regular.min.a699c3ab02229020e2d51dfe6c9a4cc556fd7781edbc166e2af9d0db9d5c66ce.css"
+    integrity="sha256-ppnDqwIikCDi1R3&#43;bJpMxVb9d4HtvBZuKvnQ251cZs4="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/brands.min.1d88b60c86c4bb253fa4d4c085d27f7ee1f6eca544f7b50b227a2e63fbcfbaaa.css"
+    integrity="sha256-HYi2DIbEuyU/pNTAhdJ/fuH27KVE97ULInouY/vPuqo="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+
+  <link rel="canonical" href="http://localhost:1313/posts/databasedesignusinglsmtreesandsstables/" />
+
+  
+  
+  
+  
+  <script
+    type="text/javascript"
+    src="/js/anatole-header.min.f9132794301a01ff16550ed66763482bd848f62243d278f5e550229a158bfd32.js"
+    integrity="sha256-&#43;RMnlDAaAf8WVQ7WZ2NIK9hI9iJD0nj15VAimhWL/TI="
+    crossorigin="anonymous"
+  ></script>
+
+  
+    
+    
+    <script
+      type="text/javascript"
+      src="/js/anatole-theme-switcher.min.d6d329d93844b162e8bed1e915619625ca91687952177552b9b3e211014a2957.js"
+      integrity="sha256-1tMp2ThEsWLovtHpFWGWJcqRaHlSF3VSubPiEQFKKVc="
+      crossorigin="anonymous"
+    ></script>
+  
+
+  
+
+  
+
+
+  
+  
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Database Design Using LSM Trees and SSTables">
+  <meta name="twitter:description" content="Hey everyone, it’s alanturrr1703 here again.
+I’m back with another blog post for you all. In my last post, I talked about hash indexes. Today, let’s jump into something else that’s also cool: LSM Trees &amp; SSTables!
+What Are LSM Trees and SSTables? LSM Trees (which stands for Log-Structured Merge) is a type of data structure that’s really simple but great for writing. Unlike traditional databases that write data directly to disk, an LSM Tree writes to an in-memory buffer first.">
+
+
+
+  
+  <meta property="og:url" content="http://localhost:1313/posts/databasedesignusinglsmtreesandsstables/">
+  <meta property="og:site_name" content="The Silicon Safari">
+  <meta property="og:title" content="Database Design Using LSM Trees and SSTables">
+  <meta property="og:description" content="Hey everyone, it’s alanturrr1703 here again.
+I’m back with another blog post for you all. In my last post, I talked about hash indexes. Today, let’s jump into something else that’s also cool: LSM Trees &amp; SSTables!
+What Are LSM Trees and SSTables? LSM Trees (which stands for Log-Structured Merge) is a type of data structure that’s really simple but great for writing. Unlike traditional databases that write data directly to disk, an LSM Tree writes to an in-memory buffer first.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2023-08-20T11:50:51+05:30">
+    <meta property="article:modified_time" content="2023-08-20T11:50:51+05:30">
+
+
+
+  
+  
+  
+  
+  <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "articleSection": "posts",
+        "name": "Database Design Using LSM Trees and SSTables",
+        "headline": "Database Design Using LSM Trees and SSTables",
+        "alternativeHeadline": "",
+        "description": "
+      
+        Hey everyone, it\u0026rsquo;s alanturrr1703 here again.\nI’m back with another blog post for you all. In my last post, I talked about hash indexes. Today, let’s jump into something else that’s also cool: LSM Trees \u0026amp; SSTables!\nWhat Are LSM Trees and SSTables? LSM Trees (which stands for Log-Structured Merge) is a type of data structure that’s really simple but great for writing. Unlike traditional databases that write data directly to disk, an LSM Tree writes to an in-memory buffer first.
+
+
+      
+
+
+    ",
+        "inLanguage": "en-us",
+        "isFamilyFriendly": "true",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/localhost:1313\/posts\/databasedesignusinglsmtreesandsstables\/"
+        },
+        "author" : {
+            "@type": "Person",
+            "name": ""
+        },
+        "creator" : {
+            "@type": "Person",
+            "name": ""
+        },
+        "accountablePerson" : {
+            "@type": "Person",
+            "name": ""
+        },
+        "copyrightHolder" : {
+            "@type": "Person",
+            "name": ""
+        },
+        "copyrightYear" : "2023",
+        "dateCreated": "2023-08-20T11:50:51.00Z",
+        "datePublished": "2023-08-20T11:50:51.00Z",
+        "dateModified": "2023-08-20T11:50:51.00Z",
+        "publisher":{
+            "@type":"Organization",
+            "name":  null ,
+            "url": "http://localhost:1313/",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "http:\/\/localhost:1313\/favicon-32x32.png",
+                "width":"32",
+                "height":"32"
+            }
+        },
+        "image": 
+      [
+      ]
+
+    ,
+        "url" : "http:\/\/localhost:1313\/posts\/databasedesignusinglsmtreesandsstables\/",
+        "wordCount" : "397",
+        "genre" : [ ],
+        "keywords" : [ ]
+    }
+  </script>
+
+
+</head>
+<body class="body">
+    <div class="wrapper">
+      <aside
+        
+          class="wrapper__sidebar"
+        
+      ><div
+  class="sidebar
+    animated fadeInDown
+  "
+>
+  <div class="sidebar__content">
+    <div class="sidebar__introduction">
+      <img
+        class="sidebar__introduction-profileimage"
+        src="/"
+        alt="profile picture"
+      />
+      
+        <div class="sidebar__introduction-title">
+          <a href="/"></a>
+        </div>
+      
+      <div class="sidebar__introduction-description">
+        <p></p>
+      </div>
+    </div>
+    <ul class="sidebar__list">
+      
+    </ul>
+  </div><footer class="footer footer__sidebar">
+  <ul class="footer__list">
+    <li class="footer__item">
+      &copy;
+      
+        
+        2024
+      
+    </li>
+    
+  </ul>
+</footer>
+  
+  <script
+    type="text/javascript"
+    src="/js/medium-zoom.min.1248fa75275e5ef0cbef27e8c1e27dc507c445ae3a2c7d2ed0be0809555dac64.js"
+    integrity="sha256-Ekj6dSdeXvDL7yfoweJ9xQfERa46LH0u0L4ICVVdrGQ="
+    crossorigin="anonymous"
+  ></script></div>
+</aside>
+      <main
+        
+          class="wrapper__main"
+        
+      >
+        <header class="header"><div
+  class="
+    animated fadeInDown
+  "
+>
+  <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+  </a>
+  <nav class="nav">
+    <ul class="nav__list" id="navMenu">
+      
+      
+    </ul>
+    <ul class="nav__list nav__list--end">
+      
+      
+        <li class="nav__list-item">
+          <div class="themeswitch">
+            <a title="Switch Theme">
+              <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
             </a>
-        </div>
+          </div>
+        </li>
+      
+    </ul>
+  </nav>
+</div>
+</header>
+  <div
+    class="post 
+      animated fadeInDown
+    "
+  >
+    
+    <div class="post__content">
+      
+        <h1>Database Design Using LSM Trees and SSTables</h1>
+      
+      <p>Hey everyone, it&rsquo;s alanturrr1703 here again.</p>
+<p>I’m back with another blog post for you all. In my last post, I talked about hash indexes. Today, let’s jump into something else that’s also cool: LSM Trees &amp; SSTables!</p>
+<h3 id="what-are-lsm-trees-and-sstables">What Are LSM Trees and SSTables?</h3>
+<p>LSM Trees (which stands for Log-Structured Merge) is a type of data structure that’s really simple but great for writing. Unlike traditional databases that write data directly to disk, an LSM Tree writes to an in-memory buffer first. This makes the first write really fast—great when you need to take in lots of data quickly!</p>
+<p>Now, about SSTables. They mean Sorted String Tables. These help LSM trees save data on disk. When the in-memory data buffer, known (not so charmingly) as MemTable, gets full, it flushes its contents to disk as an SSTable. Once written, an SSTable can’t be changed! This immutability helps in making systems secure.</p>
+<h3 id="why-should-you-care">Why Should You Care?</h3>
+<p>LSM Trees &amp; SSTables are key components for many modern NoSQL databases like Cassandra, LevelDB, and RocksDB. They work super well if your app needs a lot of write speed or has big datasets to handle.</p>
+<p>You see the real magic when you want to read data. With many SSTables stored on disk, a request might need to look through several files. But no worries! That’s where Bloom filters &amp; compaction strategies step in. Bloom filters can quickly tell you if an SSTable has the data you want. At the same time, compaction combines several SSTables into one for quicker reads later.</p>
+<h3 id="the-downsides">The Downsides?</h3>
+<p>But just like anything in tech, LSM Trees &amp; SSTables do have some downsides:</p>
+<ul>
+<li><strong>Compaction Overhead:</strong> Merging those SSTables takes up lots of resources—both CPU &amp; disk I/O.</li>
+<li><strong>Read Latency:</strong> Since data can be scattered across different SSTables, reading might be slower than using traditional B-Trees.</li>
+<li><strong>Write Amplification:</strong> Writing data repeatedly during compactions can ramp up the total I/O and wear out SSDs faster.</li>
+</ul>
+<p>Still, if you have a workload heavy on writes or deal with large datasets, these downsides could be worth it.</p>
+<h3 id="wrapping-it-up">Wrapping It Up</h3>
+<p>So there it is—LSM Trees and SSTables explained simply! They’re powerful options for some situations where you need fast write performance &amp; lots of storage.</p>
+<p>I hope this was interesting! Keep an eye out for my next blog where I&rsquo;ll talk about another way of designing databases.</p>
+<p>See you next time! 😁</p>
+</div>
+    <div class="post__footer">
+      
 
-        <div class="ml:auto">
-            
-            
-            
-        </div>
+      
     </div>
-</nav>
-<div class="d:flex flex:column@<=sm pt:90 px:24 jc:center gap:44 word-break:break-word">
-        <div class="max-w:700 w:full box:content-box">
-<article class="box:border-box pt:32">
-    <header class="mb:32">
-        <div class="font:40 font:extrabold">Database Design Using LSM Trees and SSTables</div>
-        <div class="mt:16 f:fade-60">
-            <time>Aug 20, 2023</time>
-            </div>
-    </header><div class="
-    _:where(a):hover{text-decoration-color:fade}
-    _:where(a){text-decoration:2;underline;fade-10;_text-decoration-color:fade-70@dark}
-    _:where(blockquote){bl:5;solid;fade-76/.1;_bl:5;solid;fade-34/.1@dark}
-    _:where(code){font:90%;_v:middle}
-    _:where(code:not(.highlight_*,pre_*)){p:2;6;_r:4}
-    _:where(del){text-decoration:1;line-through;fade-68;_text-decoration-color:red-64@dark}
-    _:where(figcaption){text:14;_p:10;20;0;_width:fit;_mx:auto;_font:fade-56;_font:fade-57@dark}
-    _:where(h1){font:40;_font:extrabold}
-    _:where(h1,h2,h3)+:where(h1,h2,h3){mt:.5em}
-    _:where(h1,h2,h3,h4,h5,h6){mt:2em}
-    _:where(h2){mb:1em;_font:32}
-    _:where(h3){font:24}
-    _:where(h4){font:20}
-    _:where(h5){font:16}
-    _:where(h6){font:14}
-    _:where(li)::marker{font:fade-44;_font:fade-68@dark}
-    _:where(li){pl:.375em}
-    _:where(mark){text-decoration:1;underline;#fce016;_bg:transparent;_text-decoration-color:rgb(252;224;22/.5)@dark}
-    _:where(p,li){font:fade-76;_font:16;_line-height:1.65;_font:fade-34@dark}
-    _:where(p,pre,blockquote,figure,ul,ol,table){my:1.125em}
-    >:first-child{mt:0!}
-    _:where(pre){p:20;_r:8;_overflow:auto}
-    _:where(pre,code:not(.highlight_*)){bg:fade-2;_bg:fade-92!@dark}
-    _:where(strong,b,a,code:not(.highlight_*),mark,del){font:fade-92;_font:fade-12@dark}
-    _:where(table){width:full;_border-spacing:0}
-    _:where(td){v:baseline}
-    _:where(td,th):first-child{pl:0}
-    _:where(td,th):last-child{pr:0}
-    _:where(td,th){bb:1;solid;fade-92/.06;_p:6;_b:fade-4/.04@dark}
-    _:where(th){font:fade-78;_font:14;_text:left;_font:fade-12@dark}
-    _:where(th,p_code,li_code,a,mark){font:semibold;_font:medium@dark}
-    _:where(ul){list-style-type:disc}
-    _:where(ul,ol,blockquote){pl:1.5em}
-    _:where(video,img){max-width:full}
-    _:where(a,mark){text-underline-offset:3}
-    _:where(hr){h:2;_bg:fade-10;_bg:fade-70@dark;_my:3em}
-"><p>Hi guys, it’s alanturrr1703 again.</p>
-<p>I’m back with another blog, continuing our journey into database design. Last time, we talked about Hash Indexes. Today, let’s dive into another exciting topic: LSM Trees and SSTables.</p>
-<h2 id="whats-the-deal-with-lsm-trees-and-sstables">What’s the Deal with LSM Trees and SSTables?</h2>
-<p>Alright, let’s start with the basics. LSM (Log-Structured Merge) Trees are a type of data structure that’s really good at handling writes. Unlike traditional databases that write directly to disk, LSM Trees first write to a memory buffer. This makes the initial write operation super fast, which is perfect when you have a lot of data coming in at high speed.</p>
-<p>But what about SSTables? They stand for Sorted String Tables, and they’re the way LSM Trees store data on disk. When the in-memory data buffer (also known as a MemTable) is full, it’s flushed to disk as an SSTable. Each SSTable is immutable, meaning once it’s written, it doesn’t change. This immutability makes things like data corruption less likely.</p>
-<h2 id="why-should-you-care">Why Should You Care?</h2>
-<p>LSM Trees and SSTables are the backbone of many modern NoSQL databases like Cassandra, LevelDB, and RocksDB. They’re particularly good when your application has high write throughput or when you need to handle large datasets.</p>
-<p>The real magic happens when you need to read data. Since there can be multiple SSTables on disk, a query might have to search through several files. But don’t worry, that’s where Bloom filters and compaction strategies come into play. Bloom filters help quickly check whether an SSTable might contain the data you’re looking for, while compaction merges multiple SSTables into a single one, making future reads faster.</p>
-<h2 id="the-downsides">The Downsides?</h2>
-<p>Like anything in tech, LSM Trees and SSTables have their trade-offs:</p>
-<ol>
-<li><strong>Compaction Overhead</strong>: Merging SSTables is resource-intensive, both in terms of CPU and disk I/O.</li>
-<li><strong>Read Latency</strong>: Because data can be spread across multiple SSTables, reading can be slower than with traditional B-Tree structures.</li>
-<li><strong>Write Amplification</strong>: The process of repeatedly writing data during compactions can increase the total amount of I/O, which can wear out SSDs faster.</li>
-</ol>
-<p>But if your workload is write-heavy or you’re dealing with massive datasets, these downsides might be worth it.</p>
-<h2 id="wrapping-it-up">Wrapping It Up</h2>
-<p>So, there you have it—LSM Trees and SSTables in a nutshell. They’re powerful tools for specific use cases, especially when high write performance and large-scale data storage are required.</p>
-<p>I hope you found this interesting! Stay tuned for the next blog, where I’ll discuss yet another method of database design.</p>
-<p>Until next time! 😁</p>
-</div></article>
-<footer class="py:24">
-    <div class="f:fade-30 f:14 mb:8"></div>
-    <div class="f:fade-60 f:12">Theme <a class="f:bold" href="https://github.com/serkodev/holy" _target="_blank">Holy</a></div>
-</footer></div>
-    </div>
-</body>
 
+    
+  </div>
+
+      </main>
+    </div><footer class="footer footer__base">
+  <ul class="footer__list">
+    <li class="footer__item">
+      &copy;
+      
+        
+        2024
+      
+    </li>
+    
+  </ul>
+</footer>
+  
+  <script
+    type="text/javascript"
+    src="/js/medium-zoom.min.1248fa75275e5ef0cbef27e8c1e27dc507c445ae3a2c7d2ed0be0809555dac64.js"
+    integrity="sha256-Ekj6dSdeXvDL7yfoweJ9xQfERa46LH0u0L4ICVVdrGQ="
+    crossorigin="anonymous"
+  ></script></body>
 </html>

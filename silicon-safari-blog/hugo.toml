@@ -1,5 +1,7 @@
 baseURL = 'https://silicon-safari.github.io/'
 languageCode = 'en-us'
 title = 'The Silicon Safari'
-theme = 'holy'
-
+theme = 'anatole'
+author = "alanturrr_1703"
+description = "I like to write about software, system design, devops, ML and AI"
+profilePicture = "images/profile.jpg"

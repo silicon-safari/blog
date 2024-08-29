@@ -2,32 +2,62 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>The Silicon Safari</title>
-    <link>https://silicon-safari.github.io/</link>
+    <link>http://localhost:1313/</link>
     <description>Recent content on The Silicon Safari</description>
-    <generator>Hugo</generator>
+    <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 23 Aug 2023 11:50:51 +0530</lastBuildDate>
-    <atom:link href="https://silicon-safari.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 23 Aug 2023 11:50:51 +0530</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Database Design Using B-Trees</title>
-      <link>https://silicon-safari.github.io/posts/databasedesignwithbtrees/</link>
+      <link>http://localhost:1313/posts/databasedesignwithbtrees/</link>
       <pubDate>Wed, 23 Aug 2023 11:50:51 +0530</pubDate>
-      <guid>https://silicon-safari.github.io/posts/databasedesignwithbtrees/</guid>
-      <description>Hi guys, it’s alanturrr1703 again.&#xA;I’m back with another blog, and this time, we’re diving deep into the world of B-Trees, one of the most fundamental data structures in database design. This one’s going to be a bit longer, so grab a snack and settle in.&#xA;What Are B-Trees? Let’s start with the basics—what exactly is a B-Tree?&#xA;A B-Tree is a self-balancing tree data structure that maintains sorted data and allows searches, sequential access, insertions, and deletions in logarithmic time.</description>
+      
+      <guid>http://localhost:1313/posts/databasedesignwithbtrees/</guid>
+      
+        <description>Hi guys, it’s alanturrr1703 again.
+I’m back with another blog, and this time, we’re diving deep into the world of B-Trees, one of the most fundamental data structures in database design. This one’s going to be a bit longer, so grab a snack and settle in.
+What Are B-Trees? Let’s start with the basics—what exactly is a B-Tree?
+A B-Tree is a self-balancing tree data structure that maintains sorted data and allows searches, sequential access, insertions, and deletions in logarithmic time.</description>
+      
     </item>
+    
     <item>
       <title>Database Design Using LSM Trees and SSTables</title>
-      <link>https://silicon-safari.github.io/posts/databasedesignusinglsmtreesandsstables/</link>
+      <link>http://localhost:1313/posts/databasedesignusinglsmtreesandsstables/</link>
       <pubDate>Sun, 20 Aug 2023 11:50:51 +0530</pubDate>
-      <guid>https://silicon-safari.github.io/posts/databasedesignusinglsmtreesandsstables/</guid>
-      <description>Hi guys, it’s alanturrr1703 again.&#xA;I’m back with another blog, continuing our journey into database design. Last time, we talked about Hash Indexes. Today, let’s dive into another exciting topic: LSM Trees and SSTables.&#xA;What’s the Deal with LSM Trees and SSTables? Alright, let’s start with the basics. LSM (Log-Structured Merge) Trees are a type of data structure that’s really good at handling writes. Unlike traditional databases that write directly to disk, LSM Trees first write to a memory buffer.</description>
+      
+      <guid>http://localhost:1313/posts/databasedesignusinglsmtreesandsstables/</guid>
+      
+        <description>Hey everyone, it&amp;rsquo;s alanturrr1703 here again.
+I’m back with another blog post for you all. In my last post, I talked about hash indexes. Today, let’s jump into something else that’s also cool: LSM Trees &amp;amp; SSTables!
+What Are LSM Trees and SSTables? LSM Trees (which stands for Log-Structured Merge) is a type of data structure that’s really simple but great for writing. Unlike traditional databases that write data directly to disk, an LSM Tree writes to an in-memory buffer first.</description>
+      
     </item>
+    
+    <item>
+      <title>Introduction to ACID properties</title>
+      <link>http://localhost:1313/posts/introtoacidproperties/</link>
+      <pubDate>Sun, 20 Aug 2023 11:50:51 +0530</pubDate>
+      
+      <guid>http://localhost:1313/posts/introtoacidproperties/</guid>
+      
+        <description>Hey Guys, This is alanturrr1703. I am back with another blog. This time we will deep dive into world of databases with the ACID properties of the database.</description>
+      
+    </item>
+    
     <item>
       <title>Database Design Using Hash Indexes</title>
-      <link>https://silicon-safari.github.io/posts/databasedesignusinghashmaps/</link>
+      <link>http://localhost:1313/posts/databasedesignusinghashmaps/</link>
       <pubDate>Fri, 18 Aug 2023 11:50:51 +0530</pubDate>
-      <guid>https://silicon-safari.github.io/posts/databasedesignusinghashmaps/</guid>
-      <description>Hi guys, this is alanturrr1703.&#xA;This is my first blog, and honestly, I don’t know what I’m doing. But I’ll be writing these just for fun; some blogs might actually have some good points that could be useful to someone, but honestly, these blogs are my notes about things that I’m interested in.&#xA;Why Do We Need Databases? Let’s dive into database design using Hash Indexes.&#xA;Now, why do we really need databases?</description>
+      
+      <guid>http://localhost:1313/posts/databasedesignusinghashmaps/</guid>
+      
+        <description>Hi guys, this is alanturrr1703.
+This is my first blog, and honestly, I don’t know what I’m doing. But I’ll be writing these just for fun; some blogs might actually have some good points that could be useful to someone, but honestly, these blogs are my notes about things that I’m interested in.
+Why Do We Need Databases? Let’s dive into database design using Hash Indexes.
+Now, why do we really need databases?</description>
+      
     </item>
+    
   </channel>
 </rss>
